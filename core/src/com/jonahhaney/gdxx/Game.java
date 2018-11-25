@@ -1,16 +1,9 @@
 package com.jonahhaney.gdxx;
 
-import javax.swing.text.AbstractDocument.Content;
-
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.jonahhaney.gdxx.states.GameStateManager;
 
 // Singleton
-public class Game extends ApplicationAdapter {
+public class Game extends ApplicationAdapter {/* TODO
 	
 	public static final float FIXED_TIME_STEP = (1f/60f);
 	public static final Vector2 PLAYSTATE_GRAVITY_VECTOR = new Vector2(0, -9.81f);
@@ -52,8 +45,8 @@ public class Game extends ApplicationAdapter {
 		res = new Content();
 		
 		{
-			String pathToTexture = "assets/forte_sprites.png";
-			String keyForTexture = "forte";
+			String pathToTexture = "blah/blah/blah.jpg";
+			String keyForTexture = "blah";
 			res.loadTexture(pathToTexture, keyForTexture);
 		}
 	}
@@ -89,5 +82,5 @@ public class Game extends ApplicationAdapter {
 		}
 		
 		MyInput.update();
-	}
+	}*/
 }
