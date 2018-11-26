@@ -2,7 +2,12 @@ package com.jonahhaney.gdxx;
 
 import com.badlogic.gdx.ApplicationAdapter;
 
-// Singleton
+/**
+ * TODO Implement
+ * TODO Document
+ * 
+ * @author Jonah Haney
+ */
 public class Game extends ApplicationAdapter {/* TODO
 	
 	public static final float FIXED_TIME_STEP = (1f/60f);

@@ -7,11 +7,18 @@ import java.util.Queue;
 import java.util.function.BiConsumer;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.jonahhaney.gdxx.updating.Updatable;
 
-public class InputManager implements InputProcessor {
+/**
+ * TODO Document
+ * TODO Implement Touch input management
+ * 
+ * @author Jonah Haney
+ */
+public class InputManager implements InputProcessor, Updatable {
 
 	private static final int BUTTON_TOUCH = Buttons.LEFT;
 
@@ -37,7 +44,7 @@ public class InputManager implements InputProcessor {
 	private Queue<Character> typedChars;
 
 	/**
-	 * Be sure to call {@link #update(float) update(dt)} once per frame to keep the
+	 * Be sure that {@link #update(float) update(dt)} is called once per frame to keep the
 	 * input data accurate.
 	 * 
 	 * @see #enableManagingKeys(int[])
@@ -53,7 +60,7 @@ public class InputManager implements InputProcessor {
 	}
 
 	/**
-	 * Be sure to call {@link #update(float) update(dt)} once per frame to keep the
+	 * Be sure that {@link #update(float) update(dt)} is called once per frame to keep the
 	 * input data accurate.
 	 * 
 	 * @param keysToManage array of key values from
@@ -489,10 +496,12 @@ public class InputManager implements InputProcessor {
 	 * 
 	 * This method should be called by the application once per frame.
 	 * 
-	 * @param dt Delta time, passed down from the graphics engine.
+	 * @param dt Delta-Time, passed down from the render engine
+	 * @see {@link com.badlogic.gdx.Graphics#getDeltaTime()
+	 *      Gdx.graphics.getDeltaTime()}
 	 */
 	public void update(float dt) {
-		
+
 		// update key data
 		if (this.isManagingKeys) {
 			this.keyStates.forEach(new BiConsumer<Integer, Boolean>() {
@@ -502,7 +511,7 @@ public class InputManager implements InputProcessor {
 				}
 			});
 		}
-		
+
 		// update mouse button data
 		if (this.isManagingMouseButtons) {
 			this.mouseButtonStates.forEach(new BiConsumer<Integer, Boolean>() {

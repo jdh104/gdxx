@@ -1,10 +1,11 @@
 package com.jonahhaney.gdxx;
 
 /**
+ * TODO Document
  * 
- * @author jonah
+ * @author Jonah Haney
  *
- * @param <V>
+ * @param <V> The value type associated with this setting.
  */
 public class Setting <V extends Object> {
 	

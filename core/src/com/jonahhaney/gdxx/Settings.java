@@ -2,6 +2,11 @@ package com.jonahhaney.gdxx;
 
 import java.util.HashMap;
 
+/**
+ * TODO Document
+ * 
+ * @author Jonah Haney
+ */
 public class Settings {
 	
 	public static int DEFAULT_FRAME_RATE = 60;
