@@ -9,5 +9,5 @@ import com.jonahhaney.gdxx.updating.Updatable;
  * @author Jonah Haney
  */
 public interface UpdatableRenderable extends Renderable, Updatable {
-	// nothing to do here really, just for metadata.
+    // nothing to do here really, just for metadata.
 }

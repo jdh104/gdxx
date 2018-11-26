@@ -8,12 +8,12 @@ package com.jonahhaney.gdxx.rendering;
  */
 public interface Renderable {
 
-	/**
-	 * Render the object. This should be called once per frame.
-	 * 
-	 * @param dt Delta-Time passed down from the render engine.
-	 * @see {@link com.badlogic.gdx.Graphics#getDeltaTime()
-	 *      Gdx.graphics.getDeltaTime()}
-	 */
-	public void render(float dt);
+    /**
+     * Render the object. This should be called once per frame.
+     * 
+     * @param dt Delta-Time passed down from the render engine.
+     * @see {@link com.badlogic.gdx.Graphics#getDeltaTime()
+     *      Gdx.graphics.getDeltaTime()}
+     */
+    public void render(float dt);
 }
