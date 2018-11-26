@@ -21,6 +21,22 @@ public class KeyCodeSets {
 	 */
 	public static final int[] ALL_KEY_CODES;
 
+	/**
+	 * Array containing key codes for WASD.
+	 */
+	public static final int[] WASD = new int[] { Keys.W, Keys.A, Keys.S, Keys.D };
+
+	/**
+	 * Array containing key codes for keyboard arrow keys.
+	 */
+	public static final int[] ARROW_KEYS = new int[] { Keys.UP, Keys.LEFT, Keys.DOWN, Keys.RIGHT };
+
+	/**
+	 * Array containing key codes for number keys at the top of the keyboard.
+	 */
+	public static final int[] NUMBER_KEYS = new int[] { Keys.NUM_0, Keys.NUM_1, Keys.NUM_2, Keys.NUM_3, Keys.NUM_4,
+			Keys.NUM_5, Keys.NUM_6, Keys.NUM_7, Keys.NUM_8, Keys.NUM_9 };
+
 	// Extract all the keycodes for ALL_KEY_CODES using Java Reflection
 	static {
 		ArrayList<Integer> allKeyCodesList = new ArrayList<Integer>();

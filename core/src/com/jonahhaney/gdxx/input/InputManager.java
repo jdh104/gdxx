@@ -1,18 +1,19 @@
 package com.jonahhaney.gdxx.input;
 
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
-import java.util.Set;
 import java.util.function.BiConsumer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.math.Vector2;
 
 public class InputManager implements InputProcessor {
+
+	private static final int BUTTON_TOUCH = Buttons.LEFT;
 
 	// Management fields
 	private boolean isManagingKeys = false;
@@ -69,7 +70,7 @@ public class InputManager implements InputProcessor {
 	public InputManager(int[] keysToManage) {
 		this.enableManagingKeys(keysToManage);
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -112,9 +113,39 @@ public class InputManager implements InputProcessor {
 
 	/**
 	 * 
+	 * @see #disableManagingTouch()
 	 */
 	public void disableManagingMouseButtons() {
-		// TODO
+		if (this.isManagingMouseButtons || this.isManagingTouch) {
+			this.mouseButtonStates = null;
+			this.mouseButtonPreviousStates = null;
+			this.mousePreviousButtonPressPositions = null;
+			this.isManagingMouseButtons = false;
+			this.isManagingTouch = false;
+		}
+	}
+
+	/**
+	 * 
+	 * @param mouseButtonsToEnable
+	 */
+	public void disableManagingMouseButtons(int[] mouseButtonsToDisable) {
+		if (this.isManagingMouseButtons) {
+			for (int i = 0; i < mouseButtonsToDisable.length; i++) {
+				if (this.mouseButtonStates.remove(mouseButtonsToDisable[i]) != null) {
+					this.mouseButtonPreviousStates.remove(mouseButtonsToDisable[i]);
+					this.mousePreviousButtonPressPositions.remove(mouseButtonsToDisable[i]);
+
+					if (mouseButtonsToDisable[i] == InputManager.BUTTON_TOUCH) {
+						this.isManagingTouch = false;
+					}
+				}
+			}
+
+			if (this.mouseButtonStates.size() == 0) {
+				this.disableManagingMouseButtons();
+			}
+		}
 	}
 
 	/**
@@ -141,10 +172,7 @@ public class InputManager implements InputProcessor {
 	 * 
 	 */
 	public void disableManagingTouch() {
-		if (this.isManagingTouch) {
-			this.isManagingTouch = false;
-			// TODO deallocate input data
-		}
+		this.disableManagingMouseButtons(new int[] { InputManager.BUTTON_TOUCH });
 	}
 
 	/**
@@ -169,14 +197,14 @@ public class InputManager implements InputProcessor {
 			this.keyStates = new HashMap<Integer, Boolean>();
 			this.keyPreviousStates = new HashMap<Integer, Boolean>();
 			for (int i = 0; i < keysToEnable.length; i++) {
-				keyStates.put(keysToEnable[i], false);
-				keyPreviousStates.put(keysToEnable[i], false);
+				this.keyStates.put(keysToEnable[i], false);
+				this.keyPreviousStates.put(keysToEnable[i], false);
 			}
 			this.isManagingKeys = true;
 		} else {
 			for (int i = 0; i < keysToEnable.length; i++) {
-				if (keyStates.putIfAbsent(keysToEnable[i], false) == null) {
-					keyPreviousStates.putIfAbsent(keysToEnable[i], false);
+				if (this.keyStates.putIfAbsent(keysToEnable[i], false) == null) {
+					this.keyPreviousStates.put(keysToEnable[i], false);
 				}
 			}
 		}
@@ -194,10 +222,38 @@ public class InputManager implements InputProcessor {
 
 	/**
 	 * 
-	 * @param mouseButtonsToEnable
+	 * @param mouseButtonsToEnable array of mouse button codes from
+	 *                             {@link com.badlogic.gdx.Input.Buttons}
 	 */
 	public void enableManagingMouseButtons(int[] mouseButtonsToEnable) {
-		// TODO
+		if (!this.isManagingMouseButtons) {
+			this.mouseButtonStates = new HashMap<Integer, Boolean>();
+			this.mouseButtonPreviousStates = new HashMap<Integer, Boolean>();
+			this.mousePreviousButtonPressPositions = new HashMap<Integer, Vector2>();
+			for (int i = 0; i < mouseButtonsToEnable.length; i++) {
+				this.mouseButtonStates.put(mouseButtonsToEnable[i], false);
+				this.mouseButtonPreviousStates.put(mouseButtonsToEnable[i], false);
+				this.mousePreviousButtonPressPositions.put(mouseButtonsToEnable[i], new Vector2());
+			}
+			this.isManagingMouseButtons = true;
+		} else {
+			for (int i = 0; i < mouseButtonsToEnable.length; i++) {
+				if (this.mouseButtonStates.putIfAbsent(mouseButtonsToEnable[i], false) == null) {
+					this.mouseButtonPreviousStates.put(mouseButtonsToEnable[i], false);
+					this.mousePreviousButtonPressPositions.put(mouseButtonsToEnable[i], new Vector2());
+				}
+			}
+		}
+
+		// Check to see if now managing touch
+		if (!this.isManagingTouch) {
+			for (int i = 0; i < mouseButtonsToEnable.length; i++) {
+				if (mouseButtonsToEnable[i] == InputManager.BUTTON_TOUCH) {
+					this.isManagingTouch = true;
+					return;
+				}
+			}
+		}
 	}
 
 	/**
@@ -223,10 +279,7 @@ public class InputManager implements InputProcessor {
 	 * 
 	 */
 	public void enableManagingTouch() {
-		if (!this.isManagingTouch) {
-			// TODO allocate stuff for input data storage
-			this.isManagingTouch = true;
-		}
+		this.enableManagingMouseButtons(new int[] { InputManager.BUTTON_TOUCH });
 	}
 
 	/**
@@ -402,21 +455,22 @@ public class InputManager implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		if (!this.isManagingTouch) {
+		if (!this.isManagingMouseButtons) {
 			return false;
-		} else {
-			// TODO actually manage the input
+		} else if (this.mouseButtonStates.replace(button, true) != null) {
+			this.mousePreviousButtonPressPositions.put(InputManager.BUTTON_TOUCH, new Vector2(screenX, screenY));
 			return true;
+		} else {
+			return false;
 		}
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		if (!this.isManagingTouch) {
+		if (!this.isManagingMouseButtons) {
 			return false;
 		} else {
-			// TODO actually manage the input
-			return true;
+			return this.mouseButtonStates.replace(button, false) != null;
 		}
 	}
 
@@ -438,6 +492,8 @@ public class InputManager implements InputProcessor {
 	 * @param dt Delta time, passed down from the graphics engine.
 	 */
 	public void update(float dt) {
+		
+		// update key data
 		if (this.isManagingKeys) {
 			this.keyStates.forEach(new BiConsumer<Integer, Boolean>() {
 				@Override
@@ -446,7 +502,18 @@ public class InputManager implements InputProcessor {
 				}
 			});
 		}
+		
+		// update mouse button data
+		if (this.isManagingMouseButtons) {
+			this.mouseButtonStates.forEach(new BiConsumer<Integer, Boolean>() {
+				@Override
+				public void accept(Integer mouseButtonCode, Boolean state) {
+					InputManager.this.mouseButtonPreviousStates.put(mouseButtonCode, state);
+				}
+			});
+		}
 
+		// update mouse positioning
 		if (this.isManagingMouseMovement) {
 			this.mousePreviousPosition.x = this.mousePosition.x;
 			this.mousePreviousPosition.y = this.mousePosition.y;
@@ -457,6 +524,7 @@ public class InputManager implements InputProcessor {
 			}
 		}
 
+		// update scrolling
 		if (this.isManagingScrolling) {
 			this.scrollAmount = 0;
 		}
