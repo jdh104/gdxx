@@ -1,12 +1,14 @@
 package com.jonahhaney.gdxx.rendering;
 
+import com.jonahhaney.gdxx.states.GameStateProperty;
+
 /**
  * 
  * TODO Document
  * 
  * @author Jonah Haney
  */
-public interface Renderable {
+public interface Renderable extends GameStateProperty {
 
     /**
      * Render the object. This should be called once per frame.

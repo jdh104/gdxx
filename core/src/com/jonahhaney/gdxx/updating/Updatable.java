@@ -1,11 +1,13 @@
 package com.jonahhaney.gdxx.updating;
 
+import com.jonahhaney.gdxx.states.GameStateProperty;
+
 /**
  * TODO Document
  * 
  * @author Jonah Haney
  */
-public interface Updatable {
+public interface Updatable extends GameStateProperty {
 
     /**
      * Update the object. This should be called once per frame before rendering.

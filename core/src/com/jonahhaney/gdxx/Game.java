@@ -8,6 +8,7 @@ import com.badlogic.gdx.ApplicationAdapter;
  * @author Jonah Haney
  */
 public class Game extends ApplicationAdapter {
+    
     /*
      * TODO
      * 
