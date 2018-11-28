@@ -13,13 +13,13 @@ import com.jonahhaney.gdxx.disposing.Disposable;
  */
 public class Disposer {
     
-    private Set<Disposable> disposables;
+    private Set<Disposable> disposables = new HashSet<Disposable>();
 
     /**
      * 
      */
     public Disposer() {
-        disposables = new HashSet<Disposable>();
+
     }
 
     /**

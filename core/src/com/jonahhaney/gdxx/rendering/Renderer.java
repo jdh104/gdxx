@@ -11,13 +11,13 @@ import java.util.Set;
  */
 public class Renderer {
 
-    private Set<Renderable> renderables;
+    private Set<Renderable> renderables = new HashSet<Renderable>();
 
     /**
      * 
      */
     public Renderer() {
-        renderables = new HashSet<Renderable>();
+
     }
 
     /**

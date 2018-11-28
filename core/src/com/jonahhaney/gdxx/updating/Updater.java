@@ -10,13 +10,13 @@ import java.util.Set;
  */
 public class Updater {
 
-    private Set<Updatable> updatables;
+    private Set<Updatable> updatables = new HashSet<Updatable>();
 
     /**
      * 
      */
     public Updater() {
-        updatables = new HashSet<Updatable>();
+
     }
 
     /**
