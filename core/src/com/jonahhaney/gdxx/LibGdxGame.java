@@ -33,7 +33,7 @@ public abstract class LibGdxGame extends ApplicationAdapter implements Disposabl
      * @param fps
      */
     public LibGdxGame(float fps) {
-        settings.setFrameRate(fps);
+        this.settings.setFrameRate(fps);
     }
     
     /**
@@ -43,7 +43,7 @@ public abstract class LibGdxGame extends ApplicationAdapter implements Disposabl
      * @param vScale
      */
     public LibGdxGame(float vHeight, float vWidth, float vScale) {
-        settings.setVirtualDimensions(vHeight, vWidth, vScale);
+        this.settings.setVirtualDimensions(vHeight, vWidth, vScale);
     }
     
     /**
@@ -54,8 +54,8 @@ public abstract class LibGdxGame extends ApplicationAdapter implements Disposabl
      * @param vScale
      */
     public LibGdxGame(float fps, float vHeight, float vWidth, float vScale) {
-        settings.setFrameRate(fps);
-        settings.setVirtualDimensions(vHeight, vWidth, vScale);
+        this.settings.setFrameRate(fps);
+        this.settings.setVirtualDimensions(vHeight, vWidth, vScale);
     }
 
     @Override

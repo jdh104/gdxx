@@ -29,29 +29,6 @@ public class Sprite implements Renderable, Updatable {
 
     /**
      * 
-     * @param reg
-     * @param delay
-     */
-    public void setAnimation(TextureRegion[] reg, float delay) {
-        this.animation = new Animation(reg, delay);
-        this.width = reg[0].getRegionWidth();
-        this.height = reg[0].getRegionHeight();
-    }
-
-    @Override
-    public void update(float dt) {
-        this.frame = this.animation.getFrame();
-    }
-
-    @Override
-    public void render(float dt) {
-        this.spriteBatch.begin();
-        this.spriteBatch.draw(this.frame, this.getPositionTopLeft().x, this.getPositionTopLeft().y);
-        this.spriteBatch.end();
-    }
-
-    /**
-     * 
      * @return
      */
     public TextureRegion getFrame() {
@@ -88,5 +65,28 @@ public class Sprite implements Renderable, Updatable {
      */
     public float getHeight() {
         return this.height;
+    }
+
+    /**
+     * 
+     * @param reg
+     * @param delay
+     */
+    public void setAnimation(TextureRegion[] reg, float delay) {
+        this.animation = new Animation(reg, delay);
+        this.width = reg[0].getRegionWidth();
+        this.height = reg[0].getRegionHeight();
+    }
+
+    @Override
+    public void update(float dt) {
+        this.frame = this.animation.getFrame();
+    }
+
+    @Override
+    public void render(float dt) {
+        this.spriteBatch.begin();
+        this.spriteBatch.draw(this.frame, this.getPositionTopLeft().x, this.getPositionTopLeft().y);
+        this.spriteBatch.end();
     }
 }

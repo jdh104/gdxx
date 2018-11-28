@@ -108,11 +108,9 @@ public class Settings {
     }
 
     /**
-     * 
+     * Reset all Setting objects to their respective default value.
      */
     public void resetAllDefaults() {
-        this.setFrameRate(Settings.DEFAULT_FRAME_RATE);
-
         for (Setting<? super Object> setting : this.settings.values()) {
             setting.resetToDefault();
         }
