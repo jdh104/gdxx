@@ -53,7 +53,7 @@ public class Physics {
      * @return
      */
     public static Vector2 metersToPixels(Vector2 mVector) {
-        return mVector.scl(Physics.pixelsPerMeter);
+        return new Vector2(mVector.x * Physics.pixelsPerMeter, mVector.y * Physics.pixelsPerMeter);
     }
 
     /**
@@ -71,6 +71,6 @@ public class Physics {
      * @return
      */
     public static Vector2 pixelsToMeters(Vector2 pVector) {
-        return pVector.scl(1 / Physics.pixelsPerMeter);
+        return new Vector2(pVector.x / Physics.pixelsPerMeter, pVector.y / Physics.pixelsPerMeter);
     }
 }
