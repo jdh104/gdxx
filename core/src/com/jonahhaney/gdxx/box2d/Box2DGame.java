@@ -7,17 +7,17 @@ import com.jonahhaney.gdxx.LibGdxGame;
  * 
  * @author Jonah Haney
  */
-public abstract class Box2dGame extends LibGdxGame {
+public abstract class Box2DGame extends LibGdxGame {
 
-    protected Box2dSettings settings;
+    protected Box2DSettings settings;
     
     /**
      * 
      * @param debugBox2d
      */
-    public Box2dGame(boolean debugBox2d) {
+    public Box2DGame(boolean debugBox2d) {
         super();
-        this.settings = new Box2dSettings(debugBox2d);
+        this.settings = new Box2DSettings(debugBox2d);
     }
 
     @Override

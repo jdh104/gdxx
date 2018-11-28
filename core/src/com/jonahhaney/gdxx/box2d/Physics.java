@@ -13,7 +13,14 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Physics {
 
+    /**
+     * Earth's acceleration due to gravity (g)
+     */
     public static final float DEFAULT_ACCEL_GRAVITY = -9.81f;
+    
+    /**
+     * Conversion scalar
+     */
     public static final float INCHES_PER_METER = 39.37f;
     private static final int STANDARD_PPI = 72;
 
@@ -39,36 +46,42 @@ public class Physics {
     public static float pixelsPerMeter = DEFAULT_PPM;
 
     /**
+     * Convert a dimension of {@link com.badlogic.gdx.physics.box2d.Box2D Box2D}
+     * meters to pixels for rendering purposes.
      * 
-     * @param meters
-     * @return
+     * @param meters the dimension to convert
+     * @return the dimension converted to pixels
      */
     public static float metersToPixels(float meters) {
         return meters * Physics.pixelsPerMeter;
     }
 
     /**
+     * Scale a vector. This method does not mutate the given argument.
      * 
-     * @param mVector
-     * @return
+     * @param mVector the pixel vector to scale
+     * @return a new {@link Vector2} object representing the scaled vector.
      */
     public static Vector2 metersToPixels(Vector2 mVector) {
         return new Vector2(mVector.x * Physics.pixelsPerMeter, mVector.y * Physics.pixelsPerMeter);
     }
 
     /**
+     * Convert a dimension of pixels to meters for
+     * {@link com.badlogic.gdx.physics.box2d.Box2D Box2D}
      * 
-     * @param pixels
-     * @return
+     * @param pixels the dimension to convert
+     * @return the dimension converted to meters
      */
     public static float pixelsToMeters(float pixels) {
         return pixels / Physics.pixelsPerMeter;
     }
 
     /**
+     * Scale a vector. This method does not mutate the given argument.
      * 
-     * @param pVector
-     * @return
+     * @param pVector the pixel vector to scale
+     * @return a new {@link Vector2} object representing the scaled vector.
      */
     public static Vector2 pixelsToMeters(Vector2 pVector) {
         return new Vector2(pVector.x / Physics.pixelsPerMeter, pVector.y / Physics.pixelsPerMeter);

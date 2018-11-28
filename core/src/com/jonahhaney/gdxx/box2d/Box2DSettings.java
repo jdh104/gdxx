@@ -7,7 +7,7 @@ import com.jonahhaney.gdxx.Settings;
  * 
  * @author Jonah Haney
  */
-public class Box2dSettings extends Settings {
+public class Box2DSettings extends Settings {
 
     public static final int DEFAULT_WORLD_STEP_POSITION_ITERATIONS = 2;
     public static final int DEFAULT_WORLD_STEP_VELOCITY_ITERATIONS = 6;
@@ -19,7 +19,7 @@ public class Box2dSettings extends Settings {
     /**
      * 
      */
-    public Box2dSettings(boolean debug) {
+    public Box2DSettings(boolean debug) {
         this.debug = debug;
     }
     

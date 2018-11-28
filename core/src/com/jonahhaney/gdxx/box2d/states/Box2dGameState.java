@@ -3,7 +3,7 @@ package com.jonahhaney.gdxx.box2d.states;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.jonahhaney.gdxx.box2d.Box2dSettings;
+import com.jonahhaney.gdxx.box2d.Box2DSettings;
 import com.jonahhaney.gdxx.box2d.Physics;
 import com.jonahhaney.gdxx.rendering.Renderable;
 import com.jonahhaney.gdxx.states.GameState;
@@ -17,7 +17,7 @@ import com.jonahhaney.gdxx.updating.Updatable;
 public abstract class Box2dGameState extends GameState {
 
     protected Box2DDebugRenderer b2dr;
-    protected Box2dSettings settings;
+    protected Box2DSettings settings;
     protected OrthographicCamera b2drCam;
     protected World world;
 
@@ -25,7 +25,7 @@ public abstract class Box2dGameState extends GameState {
      * 
      * @param world
      */
-    public Box2dGameState(World world, Box2dSettings settings) {
+    public Box2dGameState(World world, Box2DSettings settings) {
         this.world = world;
         this.settings = settings;
 
