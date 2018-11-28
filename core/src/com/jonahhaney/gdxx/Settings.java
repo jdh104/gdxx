@@ -9,19 +9,23 @@ import java.util.HashMap;
  */
 public class Settings {
 
-    public static int DEFAULT_FRAME_RATE = 60;
-
-    private static volatile Settings instance = new Settings();
+    public static float DEFAULT_FRAME_RATE = 60f;
+    public static float DEFAULT_HEIGHT = 100f;
+    public static float DEFAULT_SCALE = 1f;
+    public static float DEFAULT_WIDTH = 100f;
 
     private HashMap<String, Setting<? super Object>> settings = new HashMap<String, Setting<? super Object>>();
 
-    private int frameRate = DEFAULT_FRAME_RATE;
-    private float frameStepTime = 1 / (float) DEFAULT_FRAME_RATE;
+    private float frameRate = DEFAULT_FRAME_RATE;
+    private float frameStepTime = 1 / DEFAULT_FRAME_RATE;
+    private float vHeight = DEFAULT_HEIGHT;
+    private float vWidth = DEFAULT_WIDTH;
+    private float vScale = DEFAULT_SCALE;
 
     /**
      * 
      */
-    private Settings() {
+    public Settings() {
         
     }
 
@@ -29,24 +33,48 @@ public class Settings {
      * 
      * @param newSetting
      */
-    public static void addSetting(Setting<? super Object> newSetting) {
-        instance.settings.put(newSetting.getName(), newSetting);
+    public void addSetting(Setting<? super Object> newSetting) {
+        this.settings.put(newSetting.getName(), newSetting);
     }
 
     /**
      * 
      * @return
      */
-    public static int getFrameRate() {
-        return instance.frameRate;
+    public float getFrameRate() {
+        return this.frameRate;
     }
 
     /**
      * 
      * @return
      */
-    public static float getFrameStepTime() {
-        return instance.frameStepTime;
+    public float getFrameStepTime() {
+        return this.frameStepTime;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public float getHeight() {
+        return this.vHeight;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public float getScale() {
+        return this.vScale;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public float getWidth() {
+        return this.vWidth;
     }
 
     /**
@@ -54,26 +82,38 @@ public class Settings {
      * @param name
      * @return
      */
-    public static Setting<? super Object> getSetting(String name) {
-        return instance.settings.get(name);
+    public Setting<? super Object> getSetting(String name) {
+        return this.settings.get(name);
     }
 
     /**
      * 
      * @param newFrameRate
      */
-    public static void setFrameRate(int newFrameRate) {
-        instance.frameRate = newFrameRate;
-        instance.frameStepTime = 1 / (float) newFrameRate;
+    public void setFrameRate(float newFrameRate) {
+        this.frameRate = newFrameRate;
+        this.frameStepTime = 1 / newFrameRate;
+    }
+    
+    /**
+     * 
+     * @param vHeight
+     * @param vWidth
+     * @param vScale
+     */
+    public void setVirtualDimensions(float vHeight, float vWidth, float vScale) {
+        this.vHeight = vHeight;
+        this.vWidth = vWidth;
+        this.vScale = vScale;
     }
 
     /**
      * 
      */
-    public static void resetAllDefaults() {
-        Settings.setFrameRate(Settings.DEFAULT_FRAME_RATE);
+    public void resetAllDefaults() {
+        this.setFrameRate(Settings.DEFAULT_FRAME_RATE);
 
-        for (Setting<? super Object> setting : instance.settings.values()) {
+        for (Setting<? super Object> setting : this.settings.values()) {
             setting.resetToDefault();
         }
     }

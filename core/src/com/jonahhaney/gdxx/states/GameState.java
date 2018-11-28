@@ -18,13 +18,13 @@ public abstract class GameState implements Disposable, Renderable, Updatable {
     protected Disposer disposer = new Disposer();
     protected Renderer renderer = new Renderer();
     protected Updater updater = new Updater();
-    protected InputManager inputManager;
+    protected InputManager inputManager = new InputManager();
 
     /**
      * 
      */
     public GameState() {
-
+        this.create();
     }
 
     /**
@@ -33,6 +33,7 @@ public abstract class GameState implements Disposable, Renderable, Updatable {
      */
     public GameState(InputManager inputManager) {
         this.setInputManager(inputManager);
+        this.create();
     }
 
     /**
@@ -57,7 +58,7 @@ public abstract class GameState implements Disposable, Renderable, Updatable {
 
         return flag;
     }
-    
+
     /**
      * 
      * @param property
@@ -80,12 +81,12 @@ public abstract class GameState implements Disposable, Renderable, Updatable {
 
         return flag;
     }
-    
+
     @Override
     public void dispose() {
         this.disposer.disposeAll();
     }
-    
+
     /**
      * 
      * @param d
@@ -105,8 +106,8 @@ public abstract class GameState implements Disposable, Renderable, Updatable {
      * @param newInputManager
      */
     public void setInputManager(InputManager newInputManager) {
-        updater.remove(this.inputManager);
-        updater.add(newInputManager);
+        this.remove(this.inputManager);
+        this.add(newInputManager);
         this.inputManager = newInputManager;
     }
 
@@ -118,7 +119,7 @@ public abstract class GameState implements Disposable, Renderable, Updatable {
     @Override
     public void update(float dt) {
         this.updater.updateAll(dt);
-    };
+    }
 
     /**
      * Called upon creation of the Gamestate object. Put initialization code here.

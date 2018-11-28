@@ -2,6 +2,7 @@ package com.jonahhaney.gdxx.states;
 
 import java.util.Stack;
 
+import com.jonahhaney.gdxx.disposing.Disposable;
 import com.jonahhaney.gdxx.rendering.Renderable;
 import com.jonahhaney.gdxx.updating.Updatable;
 
@@ -10,7 +11,7 @@ import com.jonahhaney.gdxx.updating.Updatable;
  * 
  * @author Jonah Haney
  */
-public class GameStateManager implements Renderable, Updatable {
+public class GameStateManager implements Disposable, Renderable, Updatable {
 
     private RootGameState rootState = new RootGameState();
     private Stack<GameState> states = new Stack<GameState>();
@@ -20,6 +21,11 @@ public class GameStateManager implements Renderable, Updatable {
      */
     public GameStateManager() {
         this.states.push(rootState);
+    }
+    
+    @Override
+    public void dispose() {
+        while (this.popState());
     }
     
     /**
@@ -49,11 +55,12 @@ public class GameStateManager implements Renderable, Updatable {
     /**
      * 
      */
-    public void popState() {
+    public boolean popState() {
         if (this.states.peek() != rootState) {
             this.states.pop().dispose();
+            return true;
         } else {
-            // TODO
+            return false;
         }
     }
     

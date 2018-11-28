@@ -296,6 +296,8 @@ public class InputManager implements InputProcessor, Updatable {
             // TODO allocate stuff for input data storage
             this.isManagingTouchDrag = true;
         }
+        
+        throw new RuntimeException("Touch-Drag management not implemented yet...");
     }
 
     /**
