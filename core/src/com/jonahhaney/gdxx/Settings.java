@@ -26,7 +26,7 @@ public class Settings {
      * 
      */
     public Settings() {
-        
+
     }
 
     /**
@@ -52,7 +52,7 @@ public class Settings {
     public float getFrameStepTime() {
         return this.frameStepTime;
     }
-    
+
     /**
      * 
      * @return
@@ -60,7 +60,7 @@ public class Settings {
     public float getHeight() {
         return this.vHeight;
     }
-    
+
     /**
      * 
      * @return
@@ -68,7 +68,7 @@ public class Settings {
     public float getScale() {
         return this.vScale;
     }
-    
+
     /**
      * 
      * @return
@@ -94,7 +94,7 @@ public class Settings {
         this.frameRate = newFrameRate;
         this.frameStepTime = 1 / newFrameRate;
     }
-    
+
     /**
      * 
      * @param vHeight

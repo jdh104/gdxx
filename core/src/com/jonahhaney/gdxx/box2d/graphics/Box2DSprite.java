@@ -1,7 +1,8 @@
-package com.jonahhaney.gdxx.graphics;
+package com.jonahhaney.gdxx.box2d.graphics;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.jonahhaney.gdxx.graphics.Sprite;
 
 /**
  * TODO Document
