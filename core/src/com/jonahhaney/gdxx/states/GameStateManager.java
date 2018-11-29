@@ -2,6 +2,8 @@ package com.jonahhaney.gdxx.states;
 
 import java.util.Stack;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.jonahhaney.gdxx.disposing.Disposable;
 import com.jonahhaney.gdxx.rendering.Renderable;
 import com.jonahhaney.gdxx.updating.Updatable;
@@ -66,6 +68,7 @@ public class GameStateManager implements Disposable, Renderable, Updatable {
     
     @Override
     public void render(float dt) {
+        Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.states.peek().render(dt);
     }
     

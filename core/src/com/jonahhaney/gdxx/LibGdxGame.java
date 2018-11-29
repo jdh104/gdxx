@@ -1,6 +1,7 @@
 package com.jonahhaney.gdxx;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jonahhaney.gdxx.disposing.Disposable;
@@ -12,11 +13,11 @@ import com.jonahhaney.gdxx.states.GameStateManager;
  * 
  * @author Jonah Haney
  */
-public abstract class LibGdxGame extends ApplicationAdapter implements Disposable{
+public abstract class LibGdxGame extends ApplicationAdapter implements Disposable, ApplicationListener {
 
     protected GameStateManager gameStateManager = new GameStateManager();
     protected Settings settings = new Settings();
-    protected SpriteBatch spriteBatch = new SpriteBatch();
+    protected SpriteBatch spriteBatch;
     protected TextureManager textureManager = new TextureManager();
 
     protected float time_since_rendering = 0;
@@ -69,7 +70,7 @@ public abstract class LibGdxGame extends ApplicationAdapter implements Disposabl
      * @return
      */
     public SpriteBatch getSpriteBatch() {
-        return this.spriteBatch;
+        return this.spriteBatch == null ? this.spriteBatch = new SpriteBatch() : this.spriteBatch;
     }
 
     @Override
