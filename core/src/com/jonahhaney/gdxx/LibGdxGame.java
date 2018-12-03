@@ -1,7 +1,6 @@
 package com.jonahhaney.gdxx;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jonahhaney.gdxx.disposing.Disposable;
