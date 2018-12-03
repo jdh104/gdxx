@@ -71,18 +71,18 @@ public abstract class Box2DGameState extends GameState {
     public void setWorld(World world, Box2DSettings worldSettings) {
         this.world = world;
         this.settings = worldSettings;
-        this.updater.add(worldUpdate);
+        this.updater.add(this.worldUpdate);
 
         if (this.settings.isDebug()) {
-            b2dr = new Box2DDebugRenderer();
-            b2drCam = new OrthographicCamera();
-            b2drCam.setToOrtho(false, Physics.pixelsToMeters(settings.getWidth()),
-                    Physics.pixelsToMeters(settings.getHeight()));
+            this.b2dr = new Box2DDebugRenderer();
+            this.b2drCam = new OrthographicCamera();
+            this.b2drCam.setToOrtho(false, Physics.pixelsToMeters(this.settings.getWidth()),
+                    Physics.pixelsToMeters(this.settings.getHeight()));
 
             this.renderer.add(worldRender);
         } else {
-            b2dr = null;
-            b2drCam = null;
+            this.b2dr = null;
+            this.b2drCam = null;
             
             this.renderer.remove(worldRender);
         }
@@ -91,6 +91,11 @@ public abstract class Box2DGameState extends GameState {
     @Override
     public abstract void create();
 
+    /**
+     * Internal class used to render a {@link Box2DDebugRenderer}.
+     * 
+     * @author Jonah Haney
+     */
     private class WorldRender implements Renderable {
         @Override
         public void render(float dt) {
@@ -98,6 +103,11 @@ public abstract class Box2DGameState extends GameState {
         }
     }
 
+    /**
+     * Internal class used to update the Box2D {@link World}.
+     * 
+     * @author Jonah Haney
+     */
     private class WorldUpdate implements Updatable {
         @Override
         public void update(float dt) {
