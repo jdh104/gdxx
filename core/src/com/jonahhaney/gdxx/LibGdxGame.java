@@ -13,7 +13,7 @@ import com.jonahhaney.gdxx.states.GameStateManager;
  * 
  * @author Jonah Haney
  */
-public abstract class LibGdxGame extends ApplicationAdapter implements Disposable, ApplicationListener {
+public abstract class LibGdxGame extends ApplicationAdapter implements Disposable {
 
     protected GameStateManager gameStateManager = new GameStateManager();
     protected Settings settings = new Settings();
