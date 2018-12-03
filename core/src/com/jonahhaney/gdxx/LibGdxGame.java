@@ -69,7 +69,7 @@ public abstract class LibGdxGame extends ApplicationAdapter implements Disposabl
      * 
      * @return
      */
-    public SpriteBatch getSpriteBatch() {
+    public synchronized SpriteBatch getSpriteBatch() {
         return this.spriteBatch == null ? this.spriteBatch = new SpriteBatch() : this.spriteBatch;
     }
 
