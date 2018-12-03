@@ -94,7 +94,7 @@ public abstract class Box2DGameState extends GameState {
     private class WorldRender implements Renderable {
         @Override
         public void render(float dt) {
-            b2dr.render(Box2DGameState.this.world, Box2DGameState.this.b2drCam.combined);
+            Box2DGameState.this.b2dr.render(Box2DGameState.this.world, Box2DGameState.this.b2drCam.combined);
         }
     }
 
