@@ -19,8 +19,8 @@ public abstract class Box2DGameState extends GameState {
     protected Box2DDebugRenderer b2dr;
     protected Box2DSettings settings;
     protected OrthographicCamera b2drCam;
-    private Renderable worldRender = new Box2DGameState.WorldRender();;
-    private Updatable worldUpdate = new Box2DGameState.WorldUpdate();;
+    private Renderable worldRender = new Box2DGameState.WorldRender();
+    private Updatable worldUpdate = new Box2DGameState.WorldUpdate();
     protected World world;
 
     /**
@@ -33,18 +33,19 @@ public abstract class Box2DGameState extends GameState {
     
     /**
      * 
-     * @param settings
+     * @param gsSettings
      */
-    public Box2DGameState(Box2DSettings settings) {
-        this.settings = settings;
+    public Box2DGameState(Box2DSettings gsSettings) {
+        this.settings = gsSettings;
     }
 
     /**
      * 
-     * @param world
+     * @param gsWorld
+     * @param gsSettings
      */
-    public Box2DGameState(World world, Box2DSettings settings) {
-        this.setWorld(world, settings);
+    public Box2DGameState(World gsWorld, Box2DSettings gsSettings) {
+        this.setWorld(gsWorld, gsSettings);
     }
 
     /**
@@ -57,20 +58,20 @@ public abstract class Box2DGameState extends GameState {
     
     /**
      * 
-     * @param world
+     * @param gsWorld
      */
-    public void setWorld(World world) {
-        this.setWorld(world, this.settings);
+    public void setWorld(World gsWorld) {
+        this.setWorld(gsWorld, this.settings);
     }
     
     /**
      * 
-     * @param world
-     * @param worldSettings
+     * @param gsWorld
+     * @param gsSettings
      */
-    public void setWorld(World world, Box2DSettings worldSettings) {
-        this.world = world;
-        this.settings = worldSettings;
+    public void setWorld(World gsWorld, Box2DSettings gsSettings) {
+        this.world = gsWorld;
+        this.settings = gsSettings;
         this.updater.add(this.worldUpdate);
 
         if (this.settings.isDebug()) {
@@ -79,12 +80,12 @@ public abstract class Box2DGameState extends GameState {
             this.b2drCam.setToOrtho(false, Physics.pixelsToMeters(this.settings.getWidth()),
                     Physics.pixelsToMeters(this.settings.getHeight()));
 
-            this.renderer.add(worldRender);
+            this.renderer.add(this.worldRender);
         } else {
             this.b2dr = null;
             this.b2drCam = null;
             
-            this.renderer.remove(worldRender);
+            this.renderer.remove(this.worldRender);
         }
     }
 
