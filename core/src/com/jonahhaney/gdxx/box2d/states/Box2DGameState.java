@@ -5,8 +5,10 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.jonahhaney.gdxx.box2d.Box2DSettings;
 import com.jonahhaney.gdxx.box2d.Physics;
+import com.jonahhaney.gdxx.box2d.graphics.Box2DSprite;
 import com.jonahhaney.gdxx.rendering.Renderable;
 import com.jonahhaney.gdxx.states.GameState;
+import com.jonahhaney.gdxx.states.GameStateProperty;
 import com.jonahhaney.gdxx.updating.Updatable;
 
 /**
@@ -54,6 +56,17 @@ public abstract class Box2DGameState extends GameState {
      */
     public World getWorld() {
         return this.world;
+    }
+    
+    @Override
+    public boolean remove(GameStateProperty propertyToRemove) {
+        if (super.remove(propertyToRemove)) {
+            if (propertyToRemove instanceof Box2DSprite) {
+                this.world.destroyBody(((Box2DSprite)propertyToRemove).getBody());
+            } return true;
+        } else {
+            return false;
+        }
     }
     
     /**
