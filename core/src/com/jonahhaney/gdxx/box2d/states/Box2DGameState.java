@@ -110,10 +110,13 @@ public abstract class Box2DGameState extends GameState {
      * @author Jonah Haney
      */
     private class WorldUpdate implements Updatable {
+        
+        private int wspi = Box2DGameState.this.settings.getWSPositionIterations();
+        private int wsvi = Box2DGameState.this.settings.getWSVelocityIterations();
+        
         @Override
         public void update(float dt) {
-            Box2DGameState.this.world.step(dt, Box2DGameState.this.settings.getWSVelocityIterations(),
-                    Box2DGameState.this.settings.getWSPositionIterations());
+            Box2DGameState.this.world.step(dt, this.wsvi, this.wspi);
         }
     }
 }
