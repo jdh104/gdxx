@@ -1,6 +1,8 @@
 package com.jonahhaney.gdxx.box2d.states;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.jonahhaney.gdxx.box2d.Box2DSettings;
@@ -48,6 +50,28 @@ public abstract class Box2DGameState extends GameState {
      */
     public Box2DGameState(World gsWorld, Box2DSettings gsSettings) {
         this.setWorld(gsWorld, gsSettings);
+    }
+    
+    @Override
+    public boolean add(GameStateProperty propertyToAdd) {
+        if (super.add(propertyToAdd)) {
+            if (propertyToAdd instanceof Box2DSprite) {
+                Box2DSprite b2ds = (Box2DSprite)propertyToAdd;
+                b2ds.setBody(this.world.createBody(b2ds.getBodyDef()));
+                b2ds.createFixtures();
+            } return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * 
+     * @param bdef
+     * @return
+     */
+    public Body createBody(BodyDef bdef) {
+        return this.world.createBody(bdef);
     }
 
     /**
